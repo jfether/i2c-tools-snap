@@ -1,4 +1,4 @@
-name: i2c-tools
+name: i2ctools
 base: core20
 type: app
 version: '4.3'
