@@ -1,0 +1,55 @@
+name: i2c-tools
+base: core20
+type: app
+version: '4.3'
+summary: I2C and SMBus user-space tools
+description: |
+  This package contains an heterogeneous set of I2C tools for the Linux kernel
+  as well as an I2C library. The tools were originally part of the lm-sensors
+  project but were finally split into their own package for convenience. The
+  library is used by some of the tools, but can also be used by third-party
+  applications. The tools and library compile, run and have been tested on
+  GNU/Linux.
+
+  The latest version of the code can be downloaded from:
+  https://i2c.wiki.kernel.org/index.php/I2C_Tools
+
+license: GPL-2.0-or-later
+website: https://git.kernel.org/pub/scm/utils/i2c-tools/i2c-tools.git
+grade: stable
+confinement: strict
+
+apps:
+  i2cdetect:
+    command: bin/i2cdetect
+  i2cdump:
+    command: bin/i2cdump
+  i2cget:
+    command: bin/i2cget
+  i2cset:
+    command: bin/i2cset
+
+plugs:
+  i2c:
+
+parts:
+  i2ctools:
+    plugin: make
+    source: git://git.kernel.org/pub/scm/utils/i2c-tools/i2c-tools.git
+    source-tag: v4.3
+    organize:
+      usr/local/sbin/i2cdetect: bin/i2cdetect
+      usr/local/sbin/i2cdump: bin/i2cdump
+      usr/local/sbin/i2cget: bin/i2cget
+      usr/local/sbin/i2cset: bin/i2cset
+      usr/local/lib/libi2c.so.0.1.1: lib/libi2c.so.0.1.1
+      usr/local/lib/libi2c.so.0: lib/libi2c.so.0
+      usr/local/lib/libi2c.so: lib/libi2c.so
+    prime:
+      - bin/i2cdetect
+      - bin/i2cdump
+      - bin/i2cget
+      - bin/i2cset
+      - lib/libi2c.so.0.1.1
+      - lib/libi2c.so.0
+      - lib/libi2c.so
